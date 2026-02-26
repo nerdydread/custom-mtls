@@ -1,0 +1,35 @@
+components: {}
+info:
+  title: NXT AUTH
+  version: 1.0.0
+openapi: 3.0.3
+paths: {}
+servers:
+  - url: http://tyk-gateway:8080/cert-auth
+  - url: /cert-auth
+x-tyk-api-gateway:
+  info:
+    dbId: 699c7fd0c119650001a89b86
+    id: 4aaac89a4b0b4dd54d2334689e30fcce
+    name: CERT AUTH
+    orgId: 6862ee7967b2400001873f94
+    state:
+      active: true
+  middleware:
+    global:
+      contextVariables:
+        enabled: true
+      pluginConfig:
+        driver: goplugin
+      prePlugins:
+        - enabled: true
+          functionName: CertValidator
+          path: /opt/tyk-gateway/middleware/CertPlugin.so
+      trafficLogs:
+        enabled: true
+  server:
+    listenPath:
+      strip: true
+      value: /cert-auth/
+  upstream:
+    url: http://httpbin.org/
